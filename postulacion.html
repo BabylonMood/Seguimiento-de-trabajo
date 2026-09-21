@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    :root { --p: #4F46E5; --p2: #4338CA; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: #F5F3FF; padding: 14px; font-size: 13px; color: #1F2937; }
+    h3 { color: var(--p2); margin-bottom: 12px; font-size: 15px; }
+    .campo { margin-bottom: 10px; }
+    label { display: block; font-weight: 600; color: #374151; margin-bottom: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: .3px; }
+    input, select, textarea { width: 100%; padding: 8px 10px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 13px; background: #FFF; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--p); border-color: transparent; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .botones { display: flex; gap: 8px; margin-top: 14px; }
+    button { flex: 1; padding: 10px; border: 0; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
+    .primario { background: var(--p); color: #FFF; }
+    .primario:hover { background: var(--p2); }
+    .secundario { background: #E5E7EB; color: #374151; }
+    .ok { background: #D1FAE5; color: #065F46; padding: 9px; border-radius: 8px; display: none; margin-top: 10px; font-weight: 600; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h3>➕ Nueva postulación</h3>
+  <form id="f">
+    <div class="row">
+      <div class="campo"><label>Empresa *</label><input id="empresa" required></div>
+      <div class="campo"><label>Puesto *</label><input id="puesto" required></div>
+    </div>
+    <div class="row">
+      <div class="campo"><label>Fecha de envío</label><input id="fecha" type="date"></div>
+      <div class="campo"><label>Canal</label><select id="canal"></select></div>
+    </div>
+    <div class="row">
+      <div class="campo"><label>Estado</label><select id="estado"></select></div>
+      <div class="campo"><label>Próxima entrevista</label><input id="proxEntrevista" type="date"></div>
+    </div>
+    <div class="row">
+      <div class="campo"><label>Salario pretendido</label><input id="salarioPre" type="number" min="0" step="1000"></div>
+      <div class="campo"><label>Salario ofrecido</label><input id="salarioOf" type="number" min="0" step="1000"></div>
+    </div>
+    <div class="campo"><label>Notas</label><textarea id="notas" rows="2"></textarea></div>
+    <div class="botones">
+      <button type="submit" class="primario">💾 Guardar</button>
+      <button type="button" class="secundario" onclick="limpiar()">Limpiar</button>
+    </div>
+  </form>
+  <div class="ok" id="ok"></div>
+  <script>
+    var CANALES = ['LinkedIn', 'Computrabajo', 'Portal de empresa', 'Email directo', 'Referencia', 'Otro'];
+    var ESTADOS = ['Enviado', 'Visto', 'Entrevista', 'Prueba técnica', 'Oferta', 'Contratada', 'Rechazada', 'Sin respuesta', 'Descartada'];
+    function llenar(id, arr, def) {
+      var sel = document.getElementById(id);
+      arr.forEach(function (v) {
+        var o = document.createElement('option');
+        o.value = v; o.textContent = v;
+        if (v === def) o.selected = true;
+        sel.appendChild(o);
+      });
+    }
+    llenar('canal', CANALES, 'LinkedIn');
+    llenar('estado', ESTADOS, 'Enviado');
+    document.getElementById('fecha').value = new Date().toISOString().slice(0, 10);
+    function limpiar() {
+      document.getElementById('f').reset();
+      document.getElementById('fecha').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('ok').style.display = 'none';
+    }
+    document.getElementById('f').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var d = {
+        empresa: document.getElementById('empresa').value.trim(),
+        puesto: document.getElementById('puesto').value.trim(),
+        fecha: document.getElementById('fecha').value,
+        canal: document.getElementById('canal').value,
+        estado: document.getElementById('estado').value,
+        salarioPre: document.getElementById('salarioPre').value,
+        salarioOf: document.getElementById('salarioOf').value,
+        proxEntrevista: document.getElementById('proxEntrevista').value,
+        notas: document.getElementById('notas').value.trim()
+      };
+      google.script.run
+        .withSuccessHandler(function (r) {
+          document.getElementById('ok').style.display = 'block';
+          document.getElementById('ok').style.background = '#D1FAE5';
+          document.getElementById('ok').style.color = '#065F46';
+          document.getElementById('ok').textContent = '✅ Guardada como #' + r.id + ' · ' + d.empresa;
+          limpiar();
+        })
+        .withFailureHandler(function (err) {
+          document.getElementById('ok').style.display = 'block';
+          document.getElementById('ok').style.background = '#FEE2E2';
+          document.getElementById('ok').style.color = '#991B1B';
+          document.getElementById('ok').textContent = '❌ ' + err.message;
+        })
+        .appendPostulacion(d);
+    });
+  </script>
+</body>
+</html>

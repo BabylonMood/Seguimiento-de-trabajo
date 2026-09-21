@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vista previa · Tracker de búsqueda para Dai</title>
+<style>
+  :root{--p:#4F46E5;--p2:#4338CA;--claro:#EEF2FF;--bg:#F5F3FF;--gris:#6B7280}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif}
+  body{background:var(--bg);color:#111827;font-size:13px}
+  .barra{background:var(--p);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:12px}
+  .barra h1{font-size:15px}
+  .tabs{background:#fff;border-bottom:2px solid #E5E7EB;display:flex;padding:0 14px}
+  .tab{padding:10px 16px;cursor:pointer;font-weight:600;color:var(--gris);border-bottom:3px solid transparent}
+  .tab.act{color:var(--p2);border-color:var(--p)}
+  .wrap{max-width:900px;margin:14px auto;padding:0 14px}
+  .oculto{display:none}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+  .card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(79,70,229,.1)}
+  .card .lab{background:var(--p);color:#fff;font-size:9px;font-weight:700;letter-spacing:.5px;padding:6px 8px;text-align:center}
+  .card .num{background:var(--claro);color:#1E1B4B;font-size:22px;font-weight:800;text-align:center;padding:8px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  section{background:#fff;border-radius:10px;padding:12px 14px;margin-bottom:16px;box-shadow:0 1px 3px rgba(79,70,229,.1)}
+  section h3{color:var(--p2);font-size:11px;letter-spacing:.4px;margin-bottom:10px;border-bottom:2px solid var(--claro);padding-bottom:6px}
+  .par{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed #F3F4F6;font-size:12px}
+  .par b{color:#1F2937}
+  .bar-c{background:var(--claro);height:12px;border-radius:6px;margin-top:3px;overflow:hidden}
+  .bar-c i{display:block;height:100%;background:var(--p);border-radius:6px}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  th{background:var(--p);color:#fff;font-size:9px;padding:5px 6px;text-align:left;white-space:nowrap}
+  td{padding:5px 6px;border-bottom:1px solid #F3F4F6}
+  tr:nth-child(even) td{background:#F8FAFC}
+  .pill{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap}
+  .c-Enviado{background:#DBEAFE;color:#1E3A8A}.c-Visto{background:#FEF3C7;color:#92400E}.c-Entrevista{background:#EDE9FE;color:#6B21A8}
+  .c-Prueba{background:#FCE7F3;color:#9D174D}.c-Oferta{background:#D1FAE5;color:#065F46}.c-Contratada{background:#A7F3D0;color:#047857}
+  .c-Rechazada{background:#FEE2E2;color:#991B1B}.c-Descartada{background:#E5E7EB;color:#6B7280}.c-Charla{background:#CCFBF1;color:#0F766E}
+  .ev{padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:11px}
+  .ev-ahora{background:#FFF7ED;border-left:3px solid #F59E0B;color:#B45309;font-weight:600}
+  .ev-prox{color:#4338CA}
+  .nota{color:var(--gris);font-style:italic;font-size:10px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="barra">
+  <h1>🧭 Dashboard · Búsqueda de Dai</h1>
+</div>
+<div class="tabs">
+  <div class="tab act" data-t="dash">📊 Dashboard</div>
+  <div class="tab" data-t="reg">🗂 Postulaciones</div>
+</div>
+
+<div class="wrap">
+  <!-- ========== DASHBOARD ========== -->
+  <div id="dash">
+    <div class="cards">
+      <div class="card"><div class="lab">TOTAL CVS</div><div class="num">24</div></div>
+      <div class="card"><div class="lab">ESTE MES</div><div class="num">11</div></div>
+      <div class="card"><div class="lab">EN PROCESO</div><div class="num">9</div></div>
+      <div class="card"><div class="lab">PRÓX. ENTREV</div><div class="num">3</div></div>
+    </div>
+
+    <div class="grid2">
+      <section>
+        <h3>📊 POR ESTADO</h3>
+        <div class="par"><span>Enviado</span><b>4</b></div><div class="bar-c"><i style="width:44%"></i></div>
+        <div class="par"><span>Visto</span><b>1</b></div><div class="bar-c"><i style="width:11%"></i></div>
+        <div class="par"><span>Entrevista</span><b>4</b></div><div class="bar-c"><i style="width:44%"></i></div>
+        <div class="par"><span>Prueba técnica</span><b>3</b></div><div class="bar-c"><i style="width:33%"></i></div>
+        <div class="par"><span>Oferta</span><b>0</b></div>
+        <div class="par"><span>Contratada</span><b>2</b></div><div class="bar-c"><i style="width:22%"></i></div>
+        <div class="par"><span>Rechazada</span><b>10</b></div><div class="bar-c"><i style="width:100%"></i></div>
+        <div class="par"><span>Sin respuesta</span><b>0</b></div>
+        <div class="par"><span>Descartada</span><b>0</b></div>
+        <div class="par" style="font-weight:700;border-top:2px solid #E5E7EB;margin-top:4px;padding-top:6px"><span>Total</span><b>24</b></div>
+      </section>
+      <section>
+        <h3>🏆 POR CANAL</h3>
+        <div class="par"><span>LinkedIn</span><b>10 · 42%</b></div><div class="bar-c"><i style="width:42%"></i></div>
+        <div class="par"><span>Computrabajo</span><b>5 · 21%</b></div><div class="bar-c"><i style="width:21%"></i></div>
+        <div class="par"><span>Portal de empresa</span><b>4 · 17%</b></div><div class="bar-c"><i style="width:17%"></i></div>
+        <div class="par"><span>Email directo</span><b>2 · 8%</b></div><div class="bar-c"><i style="width:8%"></i></div>
+        <div class="par"><span>Referencia</span><b>3 · 13%</b></div><div class="bar-c"><i style="width:13%"></i></div>
+      </section>
+    </div>
+
+    <section>
+      <h3>📅 PRÓXIMOS EVENTOS · 7 días</h3>
+      <div class="ev ev-ahora">▶ HOY · 10:00 · Mercado Libre</div>
+      <div class="ev ev-ahora">▶ MAÑANA · 14:30 · Globant</div>
+      <div class="ev ev-prox">▶ vie 12 · 09:00 · Despegar</div>
+    </section>
+  </div>
+
+  <!-- ========== POSTULACIONES ========== -->
+  <div id="reg" class="oculto">
+    <section>
+      <table>
+        <tr><th>#</th><th>Empresa</th><th>Puesto</th><th>Fecha</th><th>Canal</th><th>Estado</th><th>Preten.</th><th>Ofrec.</th><th>Próx. Entrev.</th></tr>
+        <tr><td>1</td><td>Mercado Libre</td><td>Analista de datos</td><td>02/09</td><td>LinkedIn</td><td><span class="pill c-Entrevista">Entrevista</span></td><td>$900k</td><td>$950k</td><td>10/09</td></tr>
+        <tr><td>2</td><td>Globant</td><td>QA Tester</td><td>05/09</td><td>Computrabajo</td><td><span class="pill c-Prueba">Prueba técnica</span></td><td>$800k</td><td>—</td><td>11/09</td></tr>
+        <tr><td>3</td><td>Despegar</td><td>Java Developer</td><td>10/09</td><td>Referencia</td><td><span class="pill c-Enviado">Enviado</span></td><td>$1.1M</td><td>$1.05M</td><td>12/09</td></tr>
+        <tr><td>4</td><td>Acme Corp</td><td>Product Manager</td><td>18/08</td><td>Email directo</td><td><span class="pill c-Charla">Charla informal</span></td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>5</td><td>StartUp XYZ</td><td>Frontend React</td><td>22/08</td><td>LinkedIn</td><td><span class="pill c-Descartada">Descartada</span></td><td>$950k</td><td>—</td><td></td></tr>
+        <tr><td>6</td><td>TechBank</td><td>Data Engineer</td><td>24/08</td><td>Portal de empresa</td><td><span class="pill c-Rechazada">Rechazada</span></td><td>$1.2M</td><td>—</td><td></td></tr>
+        <tr><td>7</td><td>Fintech AR</td><td>Data Analyst</td><td>27/08</td><td>LinkedIn</td><td><span class="pill c-Enviado">Enviado</span></td><td>$850k</td><td>—</td><td></td></tr>
+        <tr><td>8</td><td>Crehana</td><td>UX Designer</td><td>27/08</td><td>Referencia</td><td><span class="pill c-Visto">Visto</span></td><td>$780k</td><td>—</td><td></td></tr>
+        <tr><td>9</td><td>Somos IT</td><td>Fullstack Dev</td><td>28/08</td><td>Computrabajo</td><td><span class="pill c-Contratada">Contratada 🎉</span></td><td>$1M</td><td>$1.05M</td><td></td></tr>
+        <tr><td>10</td><td>Melí Dev</td><td>Semi Senior BE</td><td>28/08</td><td>LinkedIn</td><td><span class="pill c-Enviado">Enviado</span></td><td>$980k</td><td>—</td><td></td></tr>
+      </table>
+      <div class="nota">Los colores del estado se aplican solos. Las barras del Dashboard se calculan automáticamente.</div>
+    </section>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelector('.tab.act').classList.remove('act');
+      t.classList.add('act');
+      document.querySelectorAll('#dash,#reg').forEach(function(d){ d.classList.add('oculto'); });
+      document.getElementById(t.getAttribute('data-t')).classList.remove('oculto');
+    });
+  });
+</script>
+</body>
+</html>
