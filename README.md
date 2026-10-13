@@ -1,4 +1,4 @@
-# Búsqueda laboral · Dai — Tracker (Google Sheets + Apps Script)
+# Búsqueda laboral — Tracker (Google Sheets + Apps Script)
 
 Tracker de búsqueda de trabajo en **Google Sheets + Google Apps Script**.
 Dos pestañas: una para cargar postulaciones y otra con un dashboard que
@@ -26,11 +26,11 @@ muestra el resumen a simple vista.
 |---|---|
 | `Code.gs` | Lógica completa: menús, setup, dashboard, alertas, API para el formulario |
 | `postulacion.html` | Formulario lateral para cargar postulaciones |
-| `VISTA-PREVIA.html` | Vista previa local (navegador) de cómo queda la planilla |
+| `index.html` | Vista previa local (navegador) de cómo queda la planilla |
 
 ## 🚀 Instalación (3 minutos)
 
-1. Andá a [sheets.new](https://sheets.new) y llamala "Búsqueda laboral · Dai".
+1. Andá a [sheets.new](https://sheets.new) y llamala "Búsqueda laboral".
 2. **Extensiones ▸ Apps Script**.
 3. Reemplazá el contenido de `Code.gs` con el de este proyecto.
 4. Click en **+** ▸ **HTML** → nombrá el archivo `postulacion` (sin extensión)
@@ -47,5 +47,5 @@ en cualquier momento: menú **🚀 Búsqueda ▸ ➕ Nueva postulación**.
 ## 🤔 Dónde ver el resultado
 
 Google Sheets no permite generar planillas desde texto; el repositorio trae
-`VISTA-PREVIA.html` que podés abrir en el navegador para ver el diseño
-(datos de ejemplo) antes de instalar el script.
+`index.html` que podés abrir en el navegador (o ver online en GitHub Pages)
+para ver el diseño con datos de ejemplo antes de instalar el script.

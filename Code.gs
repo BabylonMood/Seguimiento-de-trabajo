@@ -83,7 +83,7 @@ function buildDashboard(ss) {
   sh.clear();
   sh.clearFormats();
   [140, 55, 140, 15, 110, 45, 50, 130].forEach(function (w, i) { sh.setColumnWidth(i + 1, w); });
-  sh.getRange('A1:H1').merge().setValue('🧭 Dashboard · Búsqueda de Dai').setBackground(PRIMARIO).setFontColor(TEXTO_CLARO).setFontSize(14).setFontWeight('bold').setHorizontalAlignment('center').setVerticalAlignment('middle');
+  sh.getRange('A1:H1').merge().setValue('🧭 Dashboard · Búsqueda laboral').setBackground(PRIMARIO).setFontColor(TEXTO_CLARO).setFontSize(14).setFontWeight('bold').setHorizontalAlignment('center').setVerticalAlignment('middle');
   sh.setRowHeight(1, 34);
   var cards = [
     ['TOTAL CVS', '=COUNTA(' + REG + '!B2:B' + FILAS + ')', 1],
